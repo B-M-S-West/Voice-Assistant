@@ -12,6 +12,7 @@ dependencies = [
     "numpy>=2.1.1",
     "pyaudio>=0.2.14",
     "python-dotenv>=1.0.1",
+    "pyttsx3>=2.91",
     "requests>=2.32.3",
     "scipy>=1.14.1",
     "sounddevice>=0.5.0",

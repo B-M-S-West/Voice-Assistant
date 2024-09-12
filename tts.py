@@ -1,27 +1,15 @@
-import os
-import nltk
-import numpy as np
-import torch
-import sounddevice as sd
-from dotenv import load_dotenv
-from transformers import AutoProcessor, BarkModel, pipeline
-from IPython.display import Audio
-import scipy
-
-load_dotenv()
-
-MODELS_DIRECTORY = os.getenv("MODELS_DIRECTORY", "models")
-TTS_MODEL_NAME = os.getenv("TTS_MODEL_NAME", "bark-small")
+import pyttsx3
 
 def text_to_speech(text):
-    load_dir = os.path.join(MODELS_DIRECTORY, TTS_MODEL_NAME)
-
-    synthesiser = pipeline("text-to-speech", load_dir)
-
-    speech = synthesiser(text, forward_params={"do_sample": True})
-
-    scipy.io.wavfile.write("bark_out.wav", rate=speech["sampling_rate"], data=speech["audio"])
-
+    # Initialize the TTS engine
+    speaker = pyttsx3.init()
+    # Set properties (optional)
+    speaker.setProperty('rate', 200)  # Speed of speech (words per minute)
+    speaker.setProperty('volume', 1.0)  # Volume (0.0 to 1.0)
+    # Convert text to speech and play it
+    speaker.say(text)
+    # Wait for the speech to finish
+    speaker.runAndWait()
 
 if __name__ == "__main__":
     text_to_speech(
